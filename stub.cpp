@@ -11,7 +11,7 @@ const int TEST_COUNT = 100;
 const float SAMPLE_A[4] = { 1.2, 3.5, 0.7, 0.0 };
 const float SAMPLE_B[4] = { 11.5, 2.6, 6.1, 0.0 };
 const std::string FILE_NAME = "out.csv";
-const std::string FILE_HEADER = "cmuls,vmuls,cdivs,vdivscadd,vadd,csub,vsub,clen,vlen,cnorm,vnorm,cdotp,vdotp,cproj,vproj\n";
+const std::string FILE_HEADER = "vmuls,fvmuls,vdivs,fvdivs,vadd,fvadd,vsub,fvsub,vlen,fvlen,vnorm,fvnorm,vdotp,fvdotp,vproj,fvproj\n";
 
 
 void copy(float dst[4], const float src[4])
