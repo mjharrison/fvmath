@@ -1,7 +1,6 @@
 #ifndef TIMER_HPP
 #define TIMER_HPP
 
-
 #include <chrono>
 
 
@@ -14,7 +13,7 @@ class Timer
         chrono::high_resolution_clock::time_point timestamp2;
 
     public:
-        void set();
+        void start();
         double stop();
 };
 

@@ -1,17 +1,4 @@
-#include <fstream>
-#include <string>
-#include <stdlib.h>
-
-#include "fvmath.hpp"
-#include "vmath.hpp"
-#include "timer.hpp"
-
-
-const int TEST_COUNT = 100;
-const float SAMPLE_A[4] = { 1.2, 3.5, 0.7, 0.0 };
-const float SAMPLE_B[4] = { 11.5, 2.6, 6.1, 0.0 };
-const std::string FILE_NAME = "out.csv";
-const std::string FILE_HEADER = "vmuls,fvmuls,vdivs,fvdivs,vadd,fvadd,vsub,fvsub,vlen,fvlen,vnorm,fvnorm,vdotp,fvdotp,vproj,fvproj\n";
+#include "test.hpp"
 
 
 void copy(float dst[4], const float src[4])
@@ -20,6 +7,12 @@ void copy(float dst[4], const float src[4])
     {
         dst[i] = src[i];
     }
+}
+
+
+void display(float vector[4])
+{
+    printf("%f, %f, %f, %f\n", vector[0], vector[1], vector[2], vector[3]);
 }
 
 
@@ -32,7 +25,41 @@ void load(float vector[4], float x, float y, float z, float w)
 }
 
 
-void test(std::ofstream &fout)
+void run_tests(int quantity)
+{
+    std::ofstream fout;
+
+    fout.open(FILE_NAME, std::ofstream::out | std::ofstream::app);
+    if (!fout || fout.fail())
+    {
+        exit(1);
+    }
+    
+    fout << FILE_HEADER;
+    
+    for (int i = 0; i < quantity; i++)
+    {
+        test(fout);
+    }
+}
+
+
+void stub()
+{
+    Timer timer;
+    double duration;
+    float vector[4];
+
+    timer.start();
+    copy(vector, SAMPLE_A);
+    fvmuls(vector, 5.5);
+    duration = timer.stop();
+    display(vector);
+    printf("Duration: %f\n", duration);
+}
+
+
+void test(std::string fout_path, std::ofstream &fout)
 {
     Timer timer;
     double duration;
@@ -179,20 +206,8 @@ void test(std::ofstream &fout)
 
 int main()
 {
-    std::ofstream fout;
+    stub();
+    //run_tests(FILE_NAME, TESTS_QUANTITY);
 
-    fout.open(FILE_NAME, std::ofstream::out | std::ofstream::app);
-    if (!fout || fout.fail())
-    {
-        exit(1);
-    }
-    
-    fout << FILE_HEADER;
-    
-    for (int i = 0; i < TEST_COUNT; i++)
-    {
-        test(fout);
-    }
-    
     return 0;
 }

@@ -3,12 +3,12 @@
 
 void fvmuls(float vector[4], float factor)
 {
-    __m128 a = _mm_load_ps(vector);
-    __m128 b = _mm_load_ps1(&factor);
+    __m128 u = _mm_load_ps(vector);
+    __m128 k = _mm_load_ps1(&factor);
     
-    a = _mm_mul_ps(a, b);
+    u = _mm_mul_ps(u, k);
     
-    _mm_store_ps(vector, a);
+    _mm_store_ps(vector, u);
 }
 
 
