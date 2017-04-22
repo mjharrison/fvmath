@@ -27,9 +27,9 @@ void load(float vector[4], float x, float y, float z, float w)
 
 void run_tests(int quantity)
 {
-    std::ofstream fout;
+    ofstream fout;
 
-    fout.open(FILE_NAME, std::ofstream::out | std::ofstream::app);
+    fout.open(FILE_NAME, ofstream::out | ofstream::app);
     if (!fout || fout.fail())
     {
         exit(1);
@@ -50,16 +50,19 @@ void stub()
     double duration;
     float vector[4];
 
-    timer.start();
     copy(vector, SAMPLE_A);
+    
+    timer.start();
+    // Timer start
     fvmuls(vector, 5.5);
+    // Timer end
     duration = timer.stop();
     display(vector);
     printf("Duration: %f\n", duration);
 }
 
 
-void test(std::string fout_path, std::ofstream &fout)
+void test(ofstream &fout)
 {
     Timer timer;
     double duration;
@@ -71,13 +74,13 @@ void test(std::string fout_path, std::ofstream &fout)
     // Single-precision scalar multiplcation
 
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     vmuls(vector_v, factor);
     duration = timer.stop();
     fout << duration << ",";
     
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     fvmuls(vector_v, factor);
     duration = timer.stop();
     fout << duration << ",";
@@ -86,14 +89,14 @@ void test(std::string fout_path, std::ofstream &fout)
     // Single-precision scalar division
 
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     vdivs(vector_v, factor);
     duration = timer.stop();
     fout << duration << ",";
     
     
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     fvdivs(vector_v, factor);
     duration = timer.stop();
     fout << duration << ",";
@@ -103,7 +106,7 @@ void test(std::string fout_path, std::ofstream &fout)
 
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     vadd(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << ",";
@@ -111,7 +114,7 @@ void test(std::string fout_path, std::ofstream &fout)
     
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     fvadd(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << ",";
@@ -121,7 +124,7 @@ void test(std::string fout_path, std::ofstream &fout)
 
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     vsub(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << ",";
@@ -129,7 +132,7 @@ void test(std::string fout_path, std::ofstream &fout)
     
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     fvsub(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << ",";
@@ -138,14 +141,14 @@ void test(std::string fout_path, std::ofstream &fout)
     // Single-precision vector length 
 
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     vlen(vector_v);
     duration = timer.stop();
     fout << duration << ",";
     
     
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     fvlen(vector_v);
     duration = timer.stop();
     fout << duration << ",";
@@ -154,14 +157,14 @@ void test(std::string fout_path, std::ofstream &fout)
     // Single-precision vector normalization 
 
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     vnorm(vector_v);
     duration = timer.stop();
     fout << duration << ",";
     
     
     copy(vector_v, SAMPLE_A);
-    timer.set();
+    timer.start();
     fvnorm(vector_v);
     duration = timer.stop();
     fout << duration << ",";
@@ -171,7 +174,7 @@ void test(std::string fout_path, std::ofstream &fout)
 
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     vdotp(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << ",";
@@ -179,7 +182,7 @@ void test(std::string fout_path, std::ofstream &fout)
     
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     fvdotp(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << ",";
@@ -189,7 +192,7 @@ void test(std::string fout_path, std::ofstream &fout)
 
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     vproj(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << ",";
@@ -197,7 +200,7 @@ void test(std::string fout_path, std::ofstream &fout)
     
     copy(vector_v, SAMPLE_A);
     copy(vector_u, SAMPLE_B);
-    timer.set();
+    timer.start();
     fvproj(vector_v, vector_u);
     duration = timer.stop();
     fout << duration << "\n";
@@ -207,7 +210,7 @@ void test(std::string fout_path, std::ofstream &fout)
 int main()
 {
     stub();
-    //run_tests(FILE_NAME, TESTS_QUANTITY);
+    //run_tests(TESTS);
 
     return 0;
 }
