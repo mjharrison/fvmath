@@ -1,7 +1,7 @@
-#include "vivek.hpp"
+#include "fvmath.hpp"
 
 
-void vmuls(float vector[4], float factor)
+void fvmuls(float vector[4], float factor)
 {
     __m128 a = _mm_load_ps(vector);
     __m128 b = _mm_load_ps1(&factor);
@@ -12,7 +12,7 @@ void vmuls(float vector[4], float factor)
 }
 
 
-void vdivs(float vector[4], float factor)
+void fvdivs(float vector[4], float factor)
 {
     __m128 a = _mm_load_ps(vector);
     __m128 b = _mm_load_ps1(&factor);
@@ -23,7 +23,7 @@ void vdivs(float vector[4], float factor)
 }
 
 
-void vadd(float vectorA[4], float vectorB[4])
+void fvadd(float vectorA[4], float vectorB[4])
 {
     __m128 a = _mm_load_ps(vectorA);
     __m128 b = _mm_load_ps(vectorB);
@@ -34,7 +34,7 @@ void vadd(float vectorA[4], float vectorB[4])
 }
 
 
-void vsub(float vectorA[4], float vectorB[4])
+void fvsub(float vectorA[4], float vectorB[4])
 {
     __m128 a = _mm_load_ps(vectorA);
     __m128 b = _mm_load_ps(vectorB);
@@ -45,7 +45,7 @@ void vsub(float vectorA[4], float vectorB[4])
 }
 
 
-__m128 _vlen(__m128 a)
+__m128 _fvlen(__m128 a)
 {
     a = _mm_mul_ps(a, a);
     a = _mm_hadd_ps(a, a);
@@ -56,21 +56,21 @@ __m128 _vlen(__m128 a)
 }
 
 
-float vlen(float vector[4])
+float fvlen(float vector[4])
 {
     float result;
     __m128 a = _mm_load_ps(vector);
     
-    a = _vlen(a);
+    a = _fvlen(a);
     
     _mm_store_ss(&result, a);
     return result;
 }
 
 
-__m128 _vnorm(__m128 a)
+__m128 _fvnorm(__m128 a)
 {
-    __m128 b = _vlen(a);
+    __m128 b = _fvlen(a);
     
     a = _mm_div_ps(a, b);
     
@@ -78,17 +78,17 @@ __m128 _vnorm(__m128 a)
 }
 
 
-void vnorm(float vector[4])
+void fvnorm(float vector[4])
 {
     __m128 a = _mm_load_ps(vector);
 
-    a = _vnorm(a);
+    a = _fvnorm(a);
     
     _mm_store_ps(vector, a);
 }
 
 
-__m128 _vdotp(__m128 a, __m128 b)
+__m128 _fvdotp(__m128 a, __m128 b)
 {
     a = _mm_mul_ps(a, b);
     a = _mm_hadd_ps(a, a);
@@ -98,23 +98,23 @@ __m128 _vdotp(__m128 a, __m128 b)
 }
 
 
-float vdotp(float vectorA[4], float vectorB[4])
+float fvdotp(float vectorA[4], float vectorB[4])
 {
     float result;
     __m128 a = _mm_load_ps(vectorA);
     __m128 b = _mm_load_ps(vectorB);
     
-    a = _vdotp(a, b);
+    a = _fvdotp(a, b);
     
     _mm_store_ss(&result, a);
     return result;
 }
 
 
-__m128 _vproj(__m128 a, __m128 b, __m128 c)
+__m128 _fvproj(__m128 a, __m128 b, __m128 c)
 {
-    a = _vdotp(a, b);
-    b = _vlen(b);
+    a = _fvdotp(a, b);
+    b = _fvlen(b);
     b = _mm_mul_ps(b, b);
     a = _mm_mul_ps(a, b);
     
@@ -122,12 +122,12 @@ __m128 _vproj(__m128 a, __m128 b, __m128 c)
 }
 
 
-void vproj(float vectorA[4], float vectorB[4])
+void fvproj(float vectorA[4], float vectorB[4])
 {
     __m128 a = _mm_load_ps(vectorA);
     __m128 b = _mm_load_ps(vectorB);
     __m128 c = b;
     
-    a = _vproj(a, b, c);
+    a = _fvproj(a, b, c);
     _mm_store_ps(vectorA, a);
 }

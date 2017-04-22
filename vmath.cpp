@@ -1,7 +1,7 @@
-#include "civek.hpp"
+#include "vmath.hpp"
 
 
-void cmuls(float vector[4], float factor)
+void vmuls(float vector[4], float factor)
 {
     for (int i = 0; i < 4; i++)
     {
@@ -10,7 +10,7 @@ void cmuls(float vector[4], float factor)
 }
 
 
-void cdivs(float vector[4], float factor)
+void vdivs(float vector[4], float factor)
 {
     for (int i = 0; i < 4; i++)
     {
@@ -19,7 +19,7 @@ void cdivs(float vector[4], float factor)
 }
 
 
-void cadd(float vectorA[4], float vectorB[4])
+void vadd(float vectorA[4], float vectorB[4])
 {
     for (int i = 0; i < 4; i++)
     {
@@ -28,7 +28,7 @@ void cadd(float vectorA[4], float vectorB[4])
 }
 
 
-void csub(float vectorA[4], float vectorB[4])
+void vsub(float vectorA[4], float vectorB[4])
 {
     for (int i = 0; i < 4; i++)
     {
@@ -37,7 +37,7 @@ void csub(float vectorA[4], float vectorB[4])
 }
 
 
-float clen(float vector[4])
+float vlen(float vector[4])
 {
     float len = 0.0;
 
@@ -50,9 +50,9 @@ float clen(float vector[4])
 }
 
 
-void cnorm(float vector[4])
+void vnorm(float vector[4])
 {
-    float len = clen(vector);
+    float len = vlen(vector);
     
     for (int i = 0; i < 4; i++)
     {
@@ -61,7 +61,7 @@ void cnorm(float vector[4])
 }
 
 
-float cdotp(float vectorA[4], float vectorB[4])
+float vdotp(float vectorA[4], float vectorB[4])
 {
     float dotp = 0.0;
     
@@ -74,11 +74,11 @@ float cdotp(float vectorA[4], float vectorB[4])
 }
 
 
-void cproj(float vectorA[4], float vectorB[4])
+void vproj(float vectorA[4], float vectorB[4])
 {
-    float dotp = cdotp(vectorA, vectorB);
-    float len = clen(vectorB);
+    float dotp = vdotp(vectorA, vectorB);
+    float len = vlen(vectorB);
     dotp /= (len * len);
     
-    cmuls(vectorB, dotp);
+    vmuls(vectorB, dotp);
 }
