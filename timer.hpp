@@ -1,10 +1,12 @@
 #ifndef TIMER_HPP
 #define TIMER_HPP
 
+
 #include <chrono>
 
 
 using namespace std;
+
 
 class Timer
 {

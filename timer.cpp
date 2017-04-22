@@ -1,5 +1,6 @@
 #include "timer.hpp"
 
+
 void Timer::start()
 {
     timestamp1 = chrono::high_resolution_clock::now();
