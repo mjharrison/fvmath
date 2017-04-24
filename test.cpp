@@ -48,17 +48,30 @@ void stub()
 {
     Timer timer;
     double duration;
-    float vector[4];
+	double difference;
+    float vectorA[4];
+	float vectorB[4];
+	float result;
 
-    copy(vector, SAMPLE_A);
+    copy(vectorA, SAMPLE_A);
+	copy(vectorB, SAMPLE_B);
     
     timer.start();
-    // Timer start
-    fvmuls(vector, 5.5);
-    // Timer end
+    result = vdotp(vectorA, vectorB);
     duration = timer.stop();
-    display(vector);
-    printf("Duration: %f\n", duration);
+    printf("\nvdotp: %f\ntime: %f\n\n", result, duration);
+
+	difference = duration;
+
+	timer.start();
+	result = fvdotp(vectorA, vectorB);
+	duration = timer.stop();
+	printf("fvdotp: %f\ntime: %f\n\n", result, duration);
+
+	difference -= duration;
+
+	printf("diff: %f\n", difference);
+	printf(difference > 0 ? "SUCCESS\n\n" : "FAILURE\n\n");
 }
 
 
