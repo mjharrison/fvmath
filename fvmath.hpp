@@ -12,6 +12,8 @@ void fvadd(float vectorA[4], float vectorB[4]);
 
 void fvsub(float vectorA[4], float vectorB[4]);
 
+__m128 fvhsum(__m128 a);
+
 __m128 _fvlen(__m128 a);
 float fvlen(float vector[4]);
 

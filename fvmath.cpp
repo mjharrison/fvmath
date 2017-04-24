@@ -45,11 +45,22 @@ void fvsub(float vectorA[4], float vectorB[4])
 }
 
 
+__m128 _fvhsum(__m128 a)
+{
+	__m128 b = _mm_movehdup_ps(a);
+	__m128 c = _mm_add_ps(a, b);
+
+	b = _mm_movehl_ps(b, c);
+	c = _mm_add_ss(c, b);
+
+	return c;
+}
+
+
 __m128 _fvlen(__m128 a)
 {
     a = _mm_mul_ps(a, a);
-    a = _mm_hadd_ps(a, a);
-    a = _mm_hadd_ps(a, a);
+    a = _fvhsum(a);
     a = _mm_sqrt_ps(a);
     
     return a;
@@ -88,11 +99,11 @@ void fvnorm(float vector[4])
 }
 
 
+// source: http://stackoverflow.com/a/35270026
 __m128 _fvdotp(__m128 a, __m128 b)
 {
     a = _mm_mul_ps(a, b);
-    a = _mm_hadd_ps(a, a);
-    a = _mm_hadd_ps(a, a);
+    a = _fvhsum(a);
     
     return a;
 }
