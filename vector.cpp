@@ -75,7 +75,7 @@ Vector Vector::operator+(const Vector &op)
 
 Vector Vector::operator-(const Vector &op)
 {
-    return Vector(mData - op.mData;
+    return Vector(mData - op.mData);
 }
 
 
