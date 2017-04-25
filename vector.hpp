@@ -1,3 +1,4 @@
+#include "x86intrin.h"
 #include "fvmath.hpp"
 
 
@@ -8,6 +9,7 @@ class Vector
 
 	public:
 	Vector();
+	Vector(_m128 data);
 	~Vector();
 
 	float x();
