@@ -7,6 +7,12 @@ Vector::Vector()
 }
 
 
+Vector::Vector(__m128 data)
+{
+	mData = data;
+}
+
+
 float Vector::x()
 {
 	return _mm_store_ps(mData)[0];
@@ -63,10 +69,15 @@ void Vector::operator=(const Vector &op)
 
 Vector Vector::operator+(const Vector &op)
 {
-	
+	return Vector(mData + op.mData);
 }
 
 
-Vector Vector::operator-(const Vector &op);
+Vector Vector::operator-(const Vector &op)
+{
+    return Vector(mData - op.mData;
+}
+
+
 Vector Vector::operator*(const float &op);
 Vector Vector::operator/(const float &op);
