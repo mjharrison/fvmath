@@ -1,3 +1,6 @@
+#include "vector.hh"
+
+
 Vector::Vector()
 {
 	mData = _mm_xor_ps(mData, mData);
