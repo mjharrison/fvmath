@@ -39,17 +39,7 @@ float Vector::w()
 
 float Vector:len()
 {
-	float out;
-	__m128 vect = _mm_mul_ps(mData, mData);
-
-	__m128 shuf = _mm_movehdup_ps(vect);
-	__m128 sum = _mm_add_ps(vect, shuf);
-	shuf = _mm_movehl_ps(shuf, sum);
-	sum = _mm_add_ss(sum, shuf);
-
-	vect = _mm_sqrt_ps(sum);
-
-	return _mm_store_ss(&out, len);
+	return _fvlen(mData);
 }
 
 

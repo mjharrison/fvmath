@@ -6,11 +6,6 @@ class Vector
 {
 	private:
 	__m128 mData;
-	static bool SSE;
-	static bool SSE2;
-	static bool SSE3;
-	static bool SSE4;
-	static bool AVX;
 
 	public:
 	Vector();
