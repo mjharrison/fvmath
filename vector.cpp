@@ -1,6 +1,15 @@
+#include "vector.hpp"
+
+
 Vector::Vector()
 {
 	mData = _mm_xor_ps(mData, mData);
+}
+
+
+Vector::Vector(__m128 data)
+{
+	mData = data;
 }
 
 
@@ -88,10 +97,5 @@ Vector Vector::operator*(const float &op)
 
 Vector Vector::operator/(const float &op)
 {
-	return Vector(_mm_div_ps());
-}
-
-Vector Vector::operator*(const Vector &op)
-{
-	return _fvdotp(mData, op.mData);
+	return Vector(_mm_div_ps(mData, op.mData));
 }
