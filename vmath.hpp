@@ -1,5 +1,5 @@
-#ifndef CIVEK_HPP
-#define CIVEK_HPP
+#ifndef VMATH_HPP
+#define VMATH_HPP
 
 #include <math.h>
 

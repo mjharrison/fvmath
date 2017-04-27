@@ -1,5 +1,5 @@
-#ifndef VIVEK_HPP
-#define VIVEK_HPP
+#ifndef FVMATH_HPP
+#define FVMATH_HPP
 
 #include <x86intrin.h>
 
