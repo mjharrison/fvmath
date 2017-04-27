@@ -1,3 +1,4 @@
+#include <iostream>
 #include "x86intrin.h"
 #include "fvmath.hpp"
 
@@ -9,7 +10,8 @@ class Vector
 
 	public:
 	Vector();
-	Vector(_m128 data);
+	Vector(__m128 data);
+	Vector(const float array[]);
 	~Vector();
 
 	float x();
@@ -26,4 +28,6 @@ class Vector
 	Vector operator-(const Vector &op);
 	Vector operator*(const float &op);
 	Vector operator/(const float &op);
-}
+
+	friend std::ostream &operator<<(std::ostream os, const Vector &v);
+};

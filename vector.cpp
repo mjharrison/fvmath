@@ -13,6 +13,12 @@ Vector::Vector(__m128 data)
 }
 
 
+Vector::Vector(const float array[])
+{
+	mData = _mm_load_ps(array);
+}
+
+
 float Vector::x()
 {
 	return _mm_store_ps(mData)[0];
@@ -88,4 +94,18 @@ Vector Vector::operator*(const float &op)
 Vector Vector::operator/(const float &op)
 {
 	return Vector(_mm_div_ps(mData, op.mData));
+}
+
+
+
+friend std::ostream &operator<<(std::ostream os, const Vector &v)
+{
+	float array;
+
+	_mm_store_ps(array, v);
+
+	for (int i = 0; i < 4; i++)
+	{
+		os << array[i] << " ";
+	}
 }
