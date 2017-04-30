@@ -1,6 +1,16 @@
 #include "vector.hpp"
 
 
+float Vector::get(short i)
+{
+	float array[4];
+
+    _mm_store_ps(array, mData);
+    
+    return array[i];
+}
+
+
 Vector::Vector()
 {
 	mData = _mm_xor_ps(mData, mData);
@@ -21,31 +31,37 @@ Vector::Vector(const float array[])
 
 float Vector::x()
 {
-	return _mm_store_ps(mData)[0];
+    return get(0);
 }
 
 
 float Vector::y()
 {
-	return _mm_store_ps(mData)[1];
+	return get(1);
 }
 
 
 float Vector::z()
 {
-	return _mm_store_ps(mData)[2];
+	return get(2);
 }
 
 
 float Vector::w()
 {
-	return _mm_store_ps(mData)[3];
+	return get(3);
 }
 
 
-float Vector:len()
+float Vector::len()
 {
-	return _fvlen(mData);
+    __m128 len;
+    float out;
+    
+    len = _fvlen(mData);
+    
+    _mm_store_ss(&out, len);
+	return out;
 }
 
 
@@ -55,13 +71,19 @@ Vector Vector::unit()
 }
 
 
-float Vector::dotproduct(const Vector &op)
+float Vector::dot(const Vector &op)
 {
-	return _fvdotp(mData, op.mData);
+    __m128 dotp;
+    float out;
+    
+    dotp = _fvdotp(mData, op.mData);
+
+    _mm_store_ss(&out, dotp);
+	return out;
 }
 
 
-Vector Vector::projection(const Vector &op)
+Vector Vector::project(const Vector &op)
 {
 	return Vector(_fvproj(mData, op.mData));
 }
@@ -87,25 +109,30 @@ Vector Vector::operator-(const Vector &op)
 
 Vector Vector::operator*(const float &op)
 {
-	return Vector(_mm_mul_ps(mData, op.mData));
+    __m128 k = _mm_load_ps1(&op);
+
+	return Vector(_mm_mul_ps(mData, k));
 }
 
 
 Vector Vector::operator/(const float &op)
 {
-	return Vector(_mm_div_ps(mData, op.mData));
+    __m128 k = _mm_load_ps1(&op);
+
+	return Vector(_mm_div_ps(mData, k));
 }
 
 
-
-friend std::ostream &operator<<(std::ostream os, const Vector &v)
+std::ostream &operator<<(std::ostream &out, const Vector &vector)
 {
-	float array;
-
-	_mm_store_ps(array, v);
+	float array[4];
+	
+	_mm_store_ps(array, vector.mData);
 
 	for (int i = 0; i < 4; i++)
 	{
-		os << array[i] << " ";
+		out << array[i] << " ";
 	}
+	
+	return out;
 }

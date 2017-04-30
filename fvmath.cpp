@@ -122,7 +122,7 @@ float fvdotp(float vectorA[4], float vectorB[4])
 }
 
 
-__m128 _fvproj(__m128 a, __m128 b, __m128 c)
+__m128 _fvproj(__m128 a, __m128 b)
 {
     a = _fvdotp(a, b);
     b = _fvlen(b);
@@ -137,8 +137,7 @@ void fvproj(float vectorA[4], float vectorB[4])
 {
     __m128 a = _mm_load_ps(vectorA);
     __m128 b = _mm_load_ps(vectorB);
-    __m128 c = b;
     
-    a = _fvproj(a, b, c);
+    a = _fvproj(a, b);
     _mm_store_ps(vectorA, a);
 }
