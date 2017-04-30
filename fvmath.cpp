@@ -1,5 +1,6 @@
 #include "fvmath.hpp"
 
+#ifdef __SSE__
 
 void fvmuls(float vector[4], float factor)
 {
@@ -131,3 +132,89 @@ void fvproj(float vectorA[4], float vectorB[4])
     a = _fvproj(a, b, c);
     _mm_store_ps(vectorA, a);
 }
+
+#else
+
+void fvmuls(float vector[4], float factor)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        vector[i] *= factor;
+    }
+}
+
+
+void fvdivs(float vector[4], float factor)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        vector[i] /= factor;
+    }
+}
+
+
+void fvadd(float vectorA[4], float vectorB[4])
+{
+    for (int i = 0; i < 4; i++)
+    {
+        vectorA[i] += vectorB[i];
+    }
+}
+
+
+void fvsub(float vectorA[4], float vectorB[4])
+{
+    for (int i = 0; i < 4; i++)
+    {
+        vectorA[i] -= vectorB[i];
+    }
+}
+
+
+float fvlen(float vector[4])
+{
+    float len = 0.0;
+
+    for (int i = 0; i < 4; i++)
+    {
+        len += (vector[i] * vector[i]);
+    }
+
+    return sqrt(len);
+}
+
+
+void fvnorm(float vector[4])
+{
+    float len = vlen(vector);
+    
+    for (int i = 0; i < 4; i++)
+    {
+        vector[i] /= len;
+    }
+}
+
+
+float fvdotp(float vectorA[4], float vectorB[4])
+{
+    float dotp = 0.0;
+    
+    for (int i = 0; i < 4; i++)
+    {
+        dotp += (vectorA[i] * vectorB[i]);
+    }
+    
+    return dotp;
+}
+
+
+void fvproj(float vectorA[4], float vectorB[4])
+{
+    float dotp = vdotp(vectorA, vectorB);
+    float len = vlen(vectorB);
+    dotp /= (len * len);
+    
+    vmuls(vectorB, dotp);
+}
+
+#endif
