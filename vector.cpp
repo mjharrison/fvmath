@@ -123,6 +123,7 @@ Vector Vector::operator/(const float &op)
 }
 
 
+
 std::ostream &operator<<(std::ostream &out, const Vector &vector)
 {
 	float array[4];

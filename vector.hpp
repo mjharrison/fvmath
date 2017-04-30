@@ -31,13 +31,6 @@ class Vector
 	Vector operator-(const Vector &op);
 	Vector operator*(const float &op);
 	Vector operator/(const float &op);
-	
-	Vector operator==(const Vector &op);
-	Vector operator!=(const Vector &op);
-	Vector operator<(const Vector &op);
-	Vector operator<=(const Vector &op);
-	Vector operator>(const Vector &op);
-	Vector operator>=(const Vector &op);
 
 	friend std::ostream &operator<<(std::ostream &out, const Vector &vector);
 };
