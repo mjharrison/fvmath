@@ -1,3 +1,6 @@
+#ifndef VECTOR_HPP
+#define VECTOR_HPP
+
 #include <iostream>
 #include "x86intrin.h"
 #include "fvmath.hpp"
@@ -38,3 +41,6 @@ class Vector
 
 	friend std::ostream &operator<<(std::ostream &out, const Vector &vector);
 };
+
+
+#endif
