@@ -1,5 +1,5 @@
-#ifndef VMATH_HPP
-#define VMATH_HPP
+#ifndef FVMATH_HPP
+#define FVMATH_HPP
 
 #include <x86intrin.h>
 
