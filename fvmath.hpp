@@ -3,6 +3,7 @@
 
 #include <x86intrin.h>
 
+
 #ifdef __SSE__
 
 __m128 _fvlen(__m128 a);
@@ -12,22 +13,32 @@ __m128 _fvproj(__m128 a, __m128 b);
 
 #endif
 
-void fvmuls(float vector[4], float factor);
-void fvdivs(float vector[4], float factor);
-void fvadd(float vectorA[4], float vectorB[4]);
-void fvsub(float vectorA[4], float vectorB[4]);
-float fvlen(float vector[4]);
-void fvnorm(float vector[4]);
-float fvdotp(float vectorA[4], float vectorB[4]);
-void fvproj(float vectorA[4], float vectorB[4]);
+#ifdef __AVX__
 
-void fvmuls(double vector[4], double factor);
-void fvdivs(double vector[4], double factor);
-void fvadd(double vectorA[4], double vectorB[4]);
-void fvsub(double vectorA[4], double vectorB[4]);
-float fvlen(double vector[4]);
-void fvnorm(double vector[4]);
-float fvdotp(double vectorA[4], double vectorB[4]);
-void fvproj(double vectorA[4], double vectorB[4]);
+__m256 _fvlen(__m256 a);
+__m256 _fvnorm(__m256 a);
+__m256 _fvdotp(__m256 a, __m256 b);
+__m256 _fvproj(__m256 a, __m256 b);
+
+#endif
+
+void fvmuls(float vector_v[4], float vector_u);
+void fvdivs(float vector_v[4], float factor_k);
+void fvadd(float vector_v[4], float vector_u[4]);
+void fvsub(float vector_v[4], float vector_u[4]);
+float fvlen(float vector_v[4]);
+void fvnorm(float vector_v[4]);
+float fvdotp(float vector_v[4], float vector_u[4]);
+void fvproj(float vector_v[4], float vector_u[4]);
+
+void fvmuls(double vector_v[4], double factor_k);
+void fvdivs(double vector_v[4], double factor_k);
+void fvadd(double vector_v[4], double vector_u[4]);
+void fvsub(double vector_v[4], double vector_u[4]);
+float fvlen(double vector_v[4]);
+void fvnorm(double vector_v[4]);
+float fvdotp(double vector_v[4], double vector_u[4]);
+void fvproj(double vector_v[4], double vector_u[4]);
+
 
 #endif
