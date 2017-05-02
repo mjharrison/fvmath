@@ -23,9 +23,8 @@ void copy(float dst[4], const float src[4]);
 void display(float vector[4]);
 void load(float vector[4], float a, float b, float c, float d);
 
-void run_tests(int quantity);
-void stub();
-void test(ofstream &fout);
+void benchmark(int quantity);
+void verification();
 
 
 #endif

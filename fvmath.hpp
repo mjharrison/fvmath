@@ -35,9 +35,9 @@ void fvmuls(double vector_v[4], double factor_k);
 void fvdivs(double vector_v[4], double factor_k);
 void fvadd(double vector_v[4], double vector_u[4]);
 void fvsub(double vector_v[4], double vector_u[4]);
-float fvlen(double vector_v[4]);
+double fvlen(double vector_v[4]);
 void fvnorm(double vector_v[4]);
-float fvdotp(double vector_v[4], double vector_u[4]);
+double fvdotp(double vector_v[4], double vector_u[4]);
 void fvproj(double vector_v[4], double vector_u[4]);
 
 

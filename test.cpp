@@ -25,7 +25,7 @@ void load(float vector[4], float x, float y, float z, float w)
 }
 
 
-void run_tests(int quantity)
+void benchmark(int quantity)
 {
     ofstream fout;
 
@@ -44,13 +44,7 @@ void run_tests(int quantity)
 }
 
 
-void stub()
-{
-    //pass
-}
-
-
-void test(ofstream &fout)
+void verification(ofstream &fout)
 {
     //pass
 }

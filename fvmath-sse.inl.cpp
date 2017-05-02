@@ -1,5 +1,4 @@
-#ifndef FVMATH_SSE_INL
-#define FVMATH_SSE_INL
+#include "fvmath.hpp"
 
 
 void fvmuls(float vector_v[4], float factor_k)
@@ -114,8 +113,8 @@ float fvdotp(float vector_v[4], float vector_u[4])
 
 __m128 _fvproj(__m128 a, __m128 b, __m128 c)
 {
-    a = _fvdotp_d(a, b);
-    b = _fvlen_d(b);
+    a = _fvdotp(a, b);
+    b = _fvlen(b);
     b = _mm_mul_ps(b, b);
     a = _mm_div_ps(a, b);
     a = _mm_mul_ps(a, c);
@@ -133,6 +132,3 @@ void fvproj(float vector_v[4], float vector_u[4])
     a = _fvproj(a, b, c);
     _mm_store_ps(vector_v, a);
 }
-
-
-#endif
